@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Summary</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: monospace; /* Mimic the typical receipt font */
+            background-color: #f4f4f4; /* Light grey background */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to top for receipt-like flow */
+            min-height: 100vh;
+            margin: 0;
+            padding-top: 20px;
+        }
+
+        .receipt-container {
+            background-color: #fff;
+            border: 1px dashed #ccc; /* Dashed border like a tear-off line */
+            padding: 20px;
+            margin-bottom: 20px; /* Space if you have multiple receipts */
+            width: 300px; /* Adjust width as needed */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .receipt-header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .receipt-header h1 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .receipt-details {
+            margin-bottom: 15px;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dotted #ccc;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+        }
+
+        .item-name {
+            flex-grow: 1;
+        }
+
+        .item-price {
+            text-align: right;
+        }
+
+        .total-section {
+            border-top: 2px solid #ccc;
+            padding-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+        }
+
+        .payment {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .change {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px dotted #ccc;
+            padding-top: 5px;
+        }
+
+        .receipt-footer {
+            text-align: center;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="receipt-container">
+        <div class="receipt-header">
+            <h1>RECEIPT</h1>
+            <p>Karibu Grocery Limited</p>
+            <p></p>
+            <p>Contact: 0780181289</p>
+            {% if receipt.branch %}
+            <p>Branch: {{ receipt.Matuga }}</p>
+            {% else %}
+            <p>Branch: Matuga</p>
+            {% endif %}
+            <p>{{ receipt.created_at|date:"5th/May/2025" }}</p>
+        </div>
+
+        <div class="receipt-details">
+            <div class="item">
+                <span class="item-name">{{ receipt.product_name }} x {{ receipt.quantity }}</span>
+                <span class="item-price">UGX {{ receipt.total_sales }}</span>
+            </div>
+            </div>
+
+        <div class="total-section">
+            <div class="total">
+                <span>TOTAL AMOUNT:</span>
+                <span>UGX {{ receipt.total_sales }}</span>
+            </div>
+            <div class="payment">
+                <span>CASH:</span>
+                <span>UGX {{ receipt.amount_received }}</span>
+            </div>
+            <div class="change">
+                <span>CHANGE:</span>
+                <span>UGX {{ receipt.get_change }}</span>
+            </div>
+        </div>
+
+        <div class="receipt-footer">
+            <p>THANK YOU!</p>
+            <p>Visit us again soon!</p>
+            </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

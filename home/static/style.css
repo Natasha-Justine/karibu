@@ -1,0 +1,41 @@
+/* style.css */
+
+body {
+  font-family: sans-serif;
+  background-color: #9bf39b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  overflow: auto; /* Important:  Prevent scrollbars that might cause movement */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 0 auto; /* Center using auto margins */
+  position: relative; /* Important:  Needed for absolute/fixed children, but good practice anyway */
+}
+
+thead {
+  background-color: #b4f7b7;
+  color: white;
+}
+
+th,
+td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+  background-color: #e0f7fa;
+}

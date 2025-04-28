@@ -1,0 +1,110 @@
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #aaaaa7, #8fbc8f);/* Gradient background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px; /* Add some padding around the container */
+        }
+
+        .login-container {
+            background-color: blury; /* Slightly transparent white */
+            padding: 40px; /* Increased padding */
+            border-radius: 15px; /* More rounded corners */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+            width: 90%; /* Adjust width */
+            max-width: 450px; /* Slightly larger max width */
+            text-align: center; /* Center the content within the container */
+        }
+
+        .login-title {
+            color: #343a40; /* Darker text color */
+            font-size: 2.5rem; /* Larger title */
+            margin-bottom: 30px; /* More space below the title */
+            font-weight: bold; /* Make the title bold */
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Space between form elements */
+        }
+
+        .form-group label {
+            color: #495057; /* Slightly darker label color */
+            font-weight: bold; /* Make labels bold */
+            display: block; /* Ensure labels take full width */
+            margin-bottom: 5px; /* Space below the label */
+            text-align: left; /* Align labels to the left */
+        }
+
+        .form-control {
+            border: 1px solid #ced4da; /* Standard Bootstrap border */
+            border-radius: 8px; /* Slightly rounded input fields */
+            padding: 12px; /* Increased padding in input fields */
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            border-color: #c6d7e8; /* Bootstrap primary color on focus */
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Bootstrap focus shadow */
+        }
+
+        .btn-secondary {
+            background-color: #c8daee; /* Primary blue button */
+            color: white;
+            border: none;
+            border-radius: 10px; /* Rounded button */
+            padding: 12px 25px; /* Increased button padding */
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Smooth hover transition */
+        }
+
+        .btn-secondary:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        .signup-link {
+            color: #6c757d; /* Muted link color */
+            margin-top: 30px; /* More space above the link */
+            font-size: 0.9rem;
+        }
+
+        .signup-link a {
+            color: #cedbea; /* Primary blue link color */
+            text-decoration: none; /* Remove underline */
+            font-weight: bold;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline; /* Add underline on hover */
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="login-container">
+        <h1 class="login-title">LOGIN</h1>
+        <form method="POST" id="form" class="login-form">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-secondary">Login</button>
+            <div class="signup-link">
+                {% comment %} <p>Don't have an account? <a href="#">Sign up</a></p> {% endcomment %}
+            </div>
+        </form>
+    </div>
+</body>
+</html>

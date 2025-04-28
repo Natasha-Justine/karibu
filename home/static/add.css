@@ -1,0 +1,40 @@
+nav {
+  background-color:#6c6d6e; /* Dark background for better contrast */
+  padding: 15px 0; /* Add some vertical padding */
+  box-shadow: #6c6d6e; /* Subtle shadow for depth */
+  position: sticky; /* Make the navbar stick to the top on scroll */
+  top: 0;
+  z-index: 100; /* Ensure it stays above other content */
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* Use flexbox for easy horizontal alignment */
+  justify-content: center; /* Center the navigation items */
+}
+
+nav ul li {
+  margin: 0 15px; /* Add spacing between the links */
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #f8f9fa; /* Light text color */
+  font-weight: bold;
+  font-size: 1.1em;
+  transition: color 0.3s ease; /* Smooth color transition on hover */
+  padding: 8px 12px; /* Add some padding around the links */
+  border-radius: 5px; /* Slightly rounded corners */
+}
+
+nav ul li a:hover {
+  color: #e8e6e0; /* Highlight color on hover */
+  background-color: #6c6d6e; /* Subtle background on hover */
+}
+
+/* Add a subtle active state if needed */
+nav ul li a.active {
+  color: #ffc107;
+}

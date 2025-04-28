@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="bootstrap-5.3.2-dist/css/bootstrap.css">
+
+</head>
+<body>
+    {% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>Product name</th>
+                <th>Tonnage</th>
+                <th>Amount paid</th>
+                <th>Buyers name</th>
+                <th>Date and Time</th>
+                <th>Salesagent name</th>
+                <th>Method of payment</th>
+                <th>Amount received</th>
+                <th>Initiative</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for Sale in sales %}
+            <tr>
+                <td>{{ Sale.product_name }}</td>
+                <td>{{ Sale.tonnage }}</td>
+                <td>{{ Sale.amount_paid }}</td>
+                <td>{{ Sale.buyers_name }}</td>
+                <td>{{ Sale.date_and_time }}</td>
+                <td>{{ Sale.salesagent_name }}</td>
+                <td>{{ Sale.method_of_payment }}</td>
+                <td>{{ Sale.amount_received }}</td>
+                <td>
+                    <div style="display: flex; gap: 5px;">
+                        <a href=""><input type="submit" value="view"></a>
+                        <a href=""><input type="submit" value="edit"></a>
+                        <a href=""><input type="submit" value="delete"></a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+    {% endblock %}
+    <script src="bootstrap-5.3.3-dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>

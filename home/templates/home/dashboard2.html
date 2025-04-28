@@ -1,0 +1,294 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haribu Groceries Limited Dashboard</title>
+    <link rel="stylesheet" href="{% static 'dash.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-5.0.2-dist/css/bootstrap.css' %}">
+    <style>
+        body {
+            display: flex; /* Enable flexbox for the body */
+            min-height: 100vh; /* Ensure the body takes at least the full viewport height */
+            flex-direction: column; /* Stack sidebar, content, and footer vertically */
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #9bf39b; /* Example green color */
+            color: black;
+            padding-top: 20px;
+            position: fixed; /* Fixed sidebar */
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .logo-container {
+            padding: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            line-height: 1.2;
+            font-size: 1.1em;
+        }
+
+        .logo-text span {
+            font-size: 0.8em;
+            color: black;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            text-decoration: none;
+            color:black;
+            margin-bottom: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background-color: #1b5e20;
+        }
+
+        .menu-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            fill: black;
+        }
+
+        .dashboard-content {
+            flex-grow: 1; /* Allow content to take remaining vertical space */
+            margin-left: 250px; /* Adjust based on sidebar width */
+            padding: 20px;
+            display: flex;
+            justify-content: center; /* Center content horizontally */
+            align-items: flex-start; /* Align items to the top of the content area */
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 960px; /* Adjust maximum width as needed */
+            width: 100%; /* Ensure it takes full width within its container */
+            justify-content: center; /* Center cards horizontally within the container */
+        }
+
+        .dashboard-card {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            width: calc(33.33% - 20px); /* Adjust for spacing */
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            text-align: center; /* Center the content within the card */
+        }
+
+        .dashboard-card h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .dashboard-card p {
+            margin-bottom: 15px;
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .dashboard-card input[type="submit"] {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .dashboard-card input[value="view"] {
+            background-color: #4CAF50; /* Green for view */
+        }
+
+        .dashboard-card input[value="edit"] {
+            background-color: #2196F3; /* Blue for edit */
+        }
+
+        .dashboard-card input[value="delete"] {
+            background-color: #f44336; /* Red for delete */
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #6c6d6e;
+            border-top: 1px solid #817f7f;
+            font-size: 0.9em;
+            color: #f8f2f2;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column; /* Stack items vertically */
+                background-color: #c5c3c3;
+            }
+            .sidebar {
+                width: 100%;
+                position: static; /* Flow with the document */
+                height: auto;
+                overflow-x: auto;
+                display: flex;
+            }
+            .logo-container {
+                display: none;
+            }
+            .menu-item {
+                flex-shrink: 0;
+                width: auto;
+                padding: 10px 15px;
+                margin-right: 5px;
+                border-bottom: none;
+            }
+            .dashboard-content {
+                margin-left: 0;
+                padding-top: 20px;
+                align-items: center; /* Center content horizontally */
+            }
+            .card-container {
+                justify-content: center; /* Center cards horizontally */
+            }
+            .dashboard-card {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .dashboard-card {
+                width: 100%;
+            }
+            .menu-item span {
+                display: none;
+            }
+            .menu-item svg {
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo-container">
+            <div class="logo">
+                <img src="{% static 'log.jpg' %}" alt="Karibu Groceries Logo">
+                <div class="logo-text">
+                    KARIBU<br>
+                    <span>Groceries limited</span>
+                </div>
+            </div>
+        </div>
+
+        <a href="#" class="menu-item active">
+            <svg viewBox="0 0 24 24">
+                <path fill="currentColor" d="M3,13H9V7H3M3,21H9V15H3M11,21H17V11H11M11,3V9H21V3"/>
+            </svg>
+            <span>Dashboard</span>
+        </a><br>
+
+        <a href="/allsales/" class="menu-item">
+            <svg viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"/>
+            </svg>
+            <span>Allsales</span>
+        </a><br>
+
+
+        <a href="/allstock/" class="menu-item">
+            <svg viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12,16A3,3 0 0,1 9,13A3,3 0 0,1 12,10A3,3 0 0,1 15,13A3,3 0 0,1 12,16M12,6A2,2 0 0,1 14,8A2,2 0 0,1 12,10A2,2 0 0,1 10,8A2,2 0 0,1 12,6M12,18C16.42,18 20,19.27 20,21V22H4V21C4,19.27 7.58,18 12,18Z"/>
+            </svg>
+            <span>Allstock</span>
+        </a><br>
+
+        <a href="/credits/" class="menu-item">
+            <svg viewBox="0 0 24 24">
+                <path fill="currentColor" d="M5,5H19V7H5M5,11H19V13H5M5,17H15V19H5M17,17V19L20,18L17,17Z"/>
+            </svg>
+            <span>All credits</span>
+        </a><br>
+
+        <a href="/receipt/" class="menu-item">
+            <svg viewBox="0 0 24 24">
+                <path fill="currentColor" d="M11,17H13V15H11V17M11,13H13V7H11V13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/>
+            </svg>
+            <span>All receipts</span>
+        </a><br>
+
+        <a href="/logout/" class="menu-item">
+            <svg viewBox="0 0 24 24">
+                <path fill="currentColor" d="M14.08,15.59L16.67,13H7V11H16.67L14.08,8.41L15.5,7L20,12L15.5,17L14.08,15.59M19,3A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19Z"/>
+            </svg>
+            <span>Logout</span>
+        </a>
+
+    </div>
+
+    <div class="dashboard-content">
+        <div class="card-container">
+            <div class="dashboard-card">
+                <h3>Total Sales</h3>
+                <p>UGX 1,500,000</p><br>
+                <a href="/allsales/"><input type="submit" value="view"></a>
+                <a href="/allsales/"><input type="submit" value="edit"></a>
+                <a href="/allsales/"><input type="submit" value="delete"></a>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>All Stock</h3>
+                <p>25</p><br>
+                <a href="/allstock/"><input type="submit" value="view"></a>
+                <a href="/allstock/"><input type="submit" value="edit"></a>
+                <a href="/allstock/"><input type="submit" value="delete"></a>
+            </div>
+
+
+            <div class="dashboard-card">
+                <h3>Total Credits</h3>
+                <p>UGX 250,000</p><br>
+                <a href="/credits/"><input type="submit" value="view"></a>
+                <a href="/credits/"><input type="submit" value="edit"></a>
+                <a href="/credits/"><input type="submit" value="delete"></a>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>All Receipts</h3>
+                <p>150</p><br>
+                <a href="/receipt/"><input type="submit" value="view"></a>
+                <a href="/receipt/"><input type="submit" value="edit"></a>
+                <a href="/receipt/"><input type="submit" value="delete"></a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Karibu Grocery Limited.Designed by Justine Natasha.</p>
+        <p>Your Trusted Source for Quality Groceries in Uganda.</p>
+    </footer>
+
+    <script src="{% static 'bootstrap-5.0.2-dist/js/bootstrap.bundle.js' %}"></script>
+</body>
+</html>
