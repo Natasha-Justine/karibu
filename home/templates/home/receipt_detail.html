@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: monospace; /* Mimic the typical receipt font */
-            background-color: #f4f4f4; /* Light grey background */
+            background-color: #e2e3e3; /* Light grey background */
             display: flex;
             justify-content: center;
             align-items: flex-start; /* Align to top for receipt-like flow */
@@ -88,6 +88,7 @@
     </style>
 </head>
 <body>
+    
     <div class="receipt-container">
         <div class="receipt-header">
             <h1>RECEIPT</h1>
@@ -129,9 +130,16 @@
             <p>Visit us again soon!</p>
             </div>
     </div>
+    {% if user.is_manager %}
+    <a href="/dashboard2/" class="text-align-right">Back</a>
+    {% endif %}
+    {% if user.is_salesagent %}
+    <a href="/dashboard3/" class="text-align-right">back</a>
+    {% endif %}
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
 </body>
 </html>

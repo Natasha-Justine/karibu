@@ -8,7 +8,7 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            background-color: #aeabab7b;
+            background-color: #e2e3e3;
             color: #333;
             line-height: 1.6;
             display: flex;
@@ -77,14 +77,13 @@
     {% block content %}
     <div>
         <a href="{% url 'issue_item' stock.id  %}"><input type="submit" value="Sell Item"></a>
+        {% if user.is_manager %}
         <a href="{% url 'addstock' stock.id %}"><input type="submit" value="Add Item"></a>
+        {% endif %}
     </div>
     <table>
         <tbody>
-            <tr>
-                <th>Category name</th>
-                <td>{{ stock.category_name }}</td>
-            </tr>
+
             <tr>
                 <th>Item name</th>
                 <td>{{ stock.item_name}}</td>

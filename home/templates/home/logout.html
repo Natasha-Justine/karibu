@@ -61,11 +61,7 @@
     <div class="logout-container">
         <h2 class="text-center">You have successfully logged out.</h2>
         <br>
-        <form action="{% url 'login' %}" method="POST">
-            {% csrf_token %}
-        {% csrf_token %}
-        <button type="submit" class="btn btn-primary login-button">Login</button>
-    </form>
+        <a href="{% url 'index' %}" class="btn btn-info-danger">Login Again</a>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

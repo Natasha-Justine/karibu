@@ -1,4 +1,5 @@
 from django.forms import ModelForm
+from django import forms
 #accessing our models to create co-oresponding forms
 #importing all forms
 from .models import *
@@ -33,3 +34,17 @@ class UserCreation(UserCreationForm):
             user.is_staff = True
             user.save()
         return user
+
+class CreditForm(ModelForm):
+    class Meta:
+        model = Credit
+        fields = '__all__'
+        widgets = {
+            'due_date': forms.DateInput(attrs={'type': 'date'}),
+            'Dispatch_date': forms.DateInput(attrs={'type': 'date'}),
+        }
+
+class SalesForm(ModelForm):
+    class Meta:
+        model = Sale
+        fields = '__all__'

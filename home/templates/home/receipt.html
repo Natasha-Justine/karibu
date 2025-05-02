@@ -10,7 +10,7 @@
     <style>
         body {
             font-family: monospace; /* Mimic the typical receipt font */
-            background-color: #949594; /* Light grey background */
+            background-color: #e2e3e3; /* Light grey background */
             padding-top: 20px;
         }
 
@@ -85,7 +85,7 @@
         }
 
         .print-button {
-            background-color: #dc3545; /* Bootstrap danger color */
+            background-color: #0d0c0c; /* Bootstrap danger color */
             color: white;
             border: none;
             padding: 8px 15px;
@@ -153,7 +153,12 @@
         </div>
         {% endblock %}
     </div>
-
+    {% if user.is_manager %}
+    <a href="/dashboard2/" class="btn btn-primary mb-3">Back</a>
+    {% endif %}
+    {% if user.is_salesagent %}
+    <a href="/dashboard3/" class="btn btn-primary mb-3">Reverse</a>
+    {% endif %}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

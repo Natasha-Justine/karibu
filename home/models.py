@@ -68,6 +68,7 @@ class Sale(models.Model):
     unit_price = models.IntegerField(default=0, blank=True, null=True)
     amount_received = models.FloatField(default=0, blank=True, null=True)
 
+
     def total_sales(self):
         if self.product_name:
            expected_sales = self.tonnage * self.product_name.unit_price
@@ -76,8 +77,11 @@ class Sale(models.Model):
               return 0
 
     def get_change(self):
-        change = self.amount_received - self.total_sales()  # Corrected logic
-        return abs(int(change))
+        if self.amount_received is  not None:
+           change = self.amount_received - self.total_sales()  # Corrected logic
+           return int(change)
+        else:
+            return 0
 
     def __str__(self):
         return self.buyers_name
@@ -86,8 +90,8 @@ class Sale(models.Model):
 # credit table
 class Credit(models.Model):
     buyer_name = models.CharField(blank=True, max_length=255, null=True, default="")
-    NIN = models.IntegerField(unique=True)
-    location = models.IntegerField(blank=True, null=True)
+    NIN = models.CharField(unique=True, max_length=25, blank=True, null=True, default="")
+    location = models.CharField(blank=True, null=True, max_length=255, default="")
     contact = models.IntegerField(default=0)
     amount_due = models.IntegerField(default=0, null=True)
     due_date = models.DateField(auto_now_add=True)

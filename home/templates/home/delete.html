@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% block content %}
+    <form method="POST" class="text-center">
+        {% csrf_token %}
+        <p>Are you sure you want to delete the transaction for <strong>{{ details.buyers_name }}</strong>?
+            This action cannot be undone.
+        </p>
+        <div class="mt-4">
+            <button type="submit" class="btn btn-danger">Yes, Delete.</button>
+            <a href="{% url 'allsales' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+    {% endblock %}
+    
+</body>
+</html>

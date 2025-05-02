@@ -31,7 +31,7 @@ urlpatterns = [
     path('addstock/<str:pk>/',views.addstock, name='addstock'),
 
     #below is the the url for sales page
-    path('addsales/',views.addsales, name='addsales'),
+    path('addsales/<int:pk>/',views.addsales, name='addsales'),
 
     #below is the url for receipt page
     path('receipt/',views.receipt, name='receipt'),
@@ -52,7 +52,8 @@ urlpatterns = [
 
     #('', auth_views.LoginView.as_view(template_name='home/login.html'), name='login'),
 
-    path('logout/', auth_views.LogoutView.as_view(template_name='home/logout.html'), name='logout'),
+    #path('logout/', auth_views.LogoutView.as_view(template_name='home/logout.html'), name='logout'),
+    path('logout/', views.logout_view, name='logout'),
 
     path('login/', views.Login, name='login'),
 
@@ -61,4 +62,13 @@ urlpatterns = [
     path('dashboard3/', views.salesagent, name='salesagent'),
     path('dashboard2/', views.manager, name='manager'),
     path('dashboard1/', views.owner, name='owner'),
+
+    path('credit/', views.credit, name='credit'),
+    path('credit_add/', views.credit_add, name='credit_add'),
+    path('credit_edit/<int:pk>/', views.credit_edit, name='credit_edit'),
+    path('credit_delete/<int:pk>/', views.credit_delete, name='credit_delete'),
+
+    path('edit/<int:pk>/', views.editsales, name='edit'),
+    path('delete/<int:pk>/', views.delete, name='delete'),
+    path('view/<int:pk>/', views.viewsales, name='view'),
 ]

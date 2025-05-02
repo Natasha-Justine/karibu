@@ -9,7 +9,7 @@
         footer {
     text-align: center;
     padding: 15px;
-    background-color: #6c6d6e;
+    background-color: #252525;
     border-top: 1px solid #817f7f;
     font-size: 0.9em;
     margin-top: 5px;
@@ -24,178 +24,26 @@
     margin-bottom: 1px;
     color: #f8f2f2;
     }
-        .content {
-    /* Keep these styles to manage the overall content area */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center horizontally */
-    justify-content: flex-start; /* Align items to the top initially */
-    margin-top: 80px;
-    padding: 2em;
-    overflow-y: auto;
-    box-sizing: border-box;
-    width: 100%;
-    min-height: calc(100vh - (56px + 81px)); /* Adjust navbar and footer heights if needed */
-    }
     
-    .stock-levels {
-    /* Make it fixed on the viewport */
-    position: fixed;
-    top: 50%; /* Initial vertical position - center of the viewport */
-    left: 50%; /* Initial horizontal position - center of the viewport */
-    transform: translate(-50%, -50%); /* Adjust to truly center the element */
-    max-width: 400px;
-    background-color: rgba(255, 255, 255, 0.85);
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    padding: 1em;
-    width: 90%;
-    z-index: 10; /* Ensure it stays above other content if necessary */
-    }
-    
-    .stock-levels h1 {
-    color: black;
-    text-align: center;
-    margin-bottom: 1em;
-    font-family: 'Georgia', serif;
-    }
-    
-    .stock-table {
-    width: 100%;
-    border-collapse: collapse;
-    }
-    
-    .stock-table th,
-    .stock-table td {
-    padding: 0.3em;
-    border: 1px solid #ddd;
-    text-align: center;
-    font-family: 'Georgia', serif;
-    }
-    
-    .stock-table th {
-    background-color: #8c9eff;
-    color: white;
-    font-weight: bold;
-    border-bottom: 2px solid #7a82db;
-    }
-    
-    .stock-table td {
-    background-color: #f4f4f9;
-    font-family: 'Georgia', serif;
-    }
-    
-    .stock-table tr:hover {
-    background-color: #e6f2ff;
-    }
-    nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: flex-end; /* Align items to the right */
-    align-items: center;
-    height: 100%;
-    }
-    
-    nav ul li {
-    margin: 0 15px;
-    }
-    
-    nav ul li a {
-    text-decoration: none;
-    color: #f8f9fa;
-    font-weight: bold;
-    font-size: 1.1em;
-    transition: color 0.3s ease;
-    padding: 8px 12px;
-    border-radius: 5px;
-    }
-    
-    nav ul li a:hover {
-    color: #e9e7e2;
-    background-color: #6c6d6e;
-    }
     </style>
     
 </head>
-<body style="background-image: url('/static/jhg.jpg'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed; background-position: center;"></body>>
-{% block content %}
-<nav>
+<body style="background-image: url('/static/dde.jpg'); background-size: cover; background-color: #f6f5f9ae;  background-blend-mode: multiply;  background-attachment: fixed; background-position: center; opacity: 40px;"></body>
+<br><b><br><br><br><br></b>
 
-    <ul>
-        <li>
-            <a href="#"></a>
-        </li>
-        <li>
-            <a href=""></a>
-        </li>
-        <li>
-            <a href=""></a>
-        </li>
-        <li>
-            <a href=""></a>
-        </li>
-        <li>
-            <a href=""></a>
-        </li>
-        <li>
-            <a href=""></a>
-        </li>
-        <li>
-            <a href=""></a>
-        </li>
-        <li>
-            <a href=""></a>
-        </li>
-        <li>
-            <a href="/login">Login</a> </li>
-    </ul>
-</nav>
+    <h1 style="text-align: center;">WELCOME TO KARIBU GROCERIES LMT</h1>
+    <br><br><br><br><br>
+    <h2 style="text-align: center;">Your one-stop shop for all your grocery needs</h2>
+
+
+    <nav>
+        <ul style="color:black;"><br><br><br>
+            <li style="text-align: center; color:black;font-size: 40px;">
+                <a href="/login">Login</a> 
+            </li>
+        </ul><br><br><br><br>
+    </nav>
     
-    <div class="content">
-        <div class="stock-levels">
-            <h1>STOCK LEVELS</h1>
-            <table class="stock-table">
-                <thead>
-                    <tr>
-                        <th>Stock Name</th>
-                        <th>Tonnage (kg)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Beans</td>
-                        <td>2000</td>
-                    </tr>
-                    <tr>
-                        <td>Grain Maize</td>
-                        <td>1500</td>
-                    </tr>
-                    <tr>
-                        <td>Cowpeas</td>
-                        <td>1000</td>
-                    </tr>
-                    <tr>
-                        <td>G.nuts</td>
-                        <td>1000</td>
-                    </tr>
-                    <tr>
-                        <td>Cow Peas</td>
-                        <td>150</td>
-                    </tr>
-                    <tr>
-                        <td>Soya Beans</td>
-                        <td>200</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    {% endblock %} 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-         
 <footer>
     
     <p>&copy; 2025 Karibu Grocery Limited.Designed by Justine Natasha.</p>
