@@ -5,57 +5,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Add Stock</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
             font-family: sans-serif;
-            background-color: #dedbdb;/* Light gray background */
-            padding-top: 20px; /* Add some top padding for spacing */
+            background-color: #dedbdb;
+            padding-top: 20px;
         }
 
         .container {
-            max-width: 600px; /* Limit the width of the container */
-            margin: 0 auto; /* Center the container horizontally */
+            max-width: 600px;
+            margin: 0 auto;
             background-color: #fff;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         h1.text-center {
-            color: #007bff; /* Blue heading */
+            color: #007bff;
             margin-bottom: 25px;
         }
 
         .form-group {
-            margin-bottom: 20px; /* Add spacing between form fields */
+            margin-bottom: 20px;
         }
 
-        .btn-secondary {
+        .btn-primary {
             padding: 10px 20px;
             border-radius: 5px;
             font-weight: bold;
-            border: none; /* Remove default button border */
+            width: 100%;
         }
 
-        .btn-secondary:hover {
-            background-color: #0056b3; /* Darker blue on hover */
+        .btn-primary:hover {
+            background-color: #0056b3;
             cursor: pointer;
+        }
+        
+        .alert {
+            margin-bottom: 20px;
+        }
+
+        .item-details {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .item-details p {
+            margin-bottom: 8px;
+        }
+
+        .item-details strong {
+            color: #495057;
         }
     </style>
 </head>
 <body>
     {% block content %}
-    <br>
     <div class="container">
-        <form action="" method="POST">
-            <h1 class="text-center">ADD TO STOCK</h1>
+        <h1 class="text-center">Add to Stock</h1>
+        
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+            {% for error in form.non_field_errors %}
+            {{ error }}
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="item-details">
+            <h4 class="mb-3">Current Item Details:</h4>
+            <p><strong>Item Name:</strong> {{ item.item_name }}</p>
+            <p><strong>Current Stock:</strong> {{ item.tonnage }} units</p>
+            <p><strong>Branch:</strong> {{ item.branch_name }}</p>
+            <p><strong>Unit Price:</strong> {{ item.unit_price }}</p>
+        </div>
+        
+        <form method="POST">
             {% csrf_token %}
             {{ form|crispy }}
-            <div class="text-center">
-                <input type="submit" value="Add to Stock" class="btn btn-secondary">
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">Add to Stock</button>
             </div>
         </form>
+        
+        <div class="text-center mt-3">
+            <a href="{% url 'allstock' %}" class="btn btn-secondary">Back to Stock List</a>
+        </div>
     </div>
     {% endblock %}
 </body>

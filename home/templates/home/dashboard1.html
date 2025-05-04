@@ -272,7 +272,12 @@
                 <h3>Total Credits</h3>
                 <p>UGX {{ total_credit_sales| floatformat:0 }}</p><br>
             </div>
+            <div class="dashboard-card">
+                <h3>Low Stock Items</h3>
+                <p>{{ low_stock_items.count }}</p><br>
+            </div>
         </div>
+        <h1 style="text-align: center; color: #333;">Stock Levels On Branch</h1>
         <div class="stock-grid">
             {% for stock in combined_stocks %}
             <div class="stock-card">

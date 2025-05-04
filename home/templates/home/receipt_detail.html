@@ -93,14 +93,9 @@
         <div class="receipt-header">
             <h1>RECEIPT</h1>
             <p>Karibu Grocery Limited</p>
-            <p></p>
             <p>Contact: 0780181289</p>
-            {% if receipt.branch %}
-            <p>Branch: {{ receipt.Matuga }}</p>
-            {% else %}
-            <p>Branch: Matuga</p>
-            {% endif %}
-            <p>{{ receipt.created_at|date:"5th/May/2025" }}</p>
+            <p>Branch: {{ receipt.product_name.branch_name }}</p>
+            <p>{{ receipt.date_and_time|date:"d/m/Y H:i" }}</p>
         </div>
 
         <div class="receipt-details">
@@ -108,7 +103,7 @@
                 <span class="item-name">{{ receipt.product_name }} x {{ receipt.quantity }}</span>
                 <span class="item-price">UGX {{ receipt.total_sales }}</span>
             </div>
-            </div>
+        </div>
 
         <div class="total-section">
             <div class="total">
@@ -128,13 +123,13 @@
         <div class="receipt-footer">
             <p>THANK YOU!</p>
             <p>Visit us again soon!</p>
-            </div>
+        </div>
     </div>
     {% if user.is_manager %}
-    <a href="/dashboard2/" class="text-align-right">Back</a>
+    <a href="/dashboard2/" class="btn btn-primary mb-3">Back</a>
     {% endif %}
     {% if user.is_salesagent %}
-    <a href="/dashboard3/" class="text-align-right">back</a>
+    <a href="/dashboard3/" class="btn btn-primary mb-3">Back</a>
     {% endif %}
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

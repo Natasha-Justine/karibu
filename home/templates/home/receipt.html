@@ -115,13 +115,9 @@
                     <h1>RECEIPT</h1>
                     <h2></h2>
                     <p>Karibu Grocery Limited</p>
-                    {% if forloop.counter0|divisibleby:2 %}
-                    <p>Branch: Matuga</p>
-                    {% else %}
-                    <p>Branch: Maganjo</p>
-                    {% endif %}
+                    <p>Branch: {{ sale.product_name.branch_name }}</p>
                     <p>Contact: 0780181289</p>
-                    <p>{{ sale.created_at|date:"d/m/Y H:i" }}</p>
+                    <p>{{ sale.date_and_time|date:"d/m/Y H:i" }}</p>
                 </div>
 
                 <div class="receipt-details">
@@ -129,7 +125,7 @@
                         <span class="item-name">{{ sale.product_name }} x {{ sale.quantity }}</span>
                         <span class="item-price">Ugx {{ sale.total_sales }}</span>
                     </div>
-                    </div>
+                </div>
 
                 <div class="total">
                     <span>TOTAL AMOUNT:</span>
@@ -149,7 +145,7 @@
                 <div class="receipt-footer">
                     <p>THANK YOU!</p>
                     <p>Visit us again soon!</p>
-                    </div>
+                </div>
 
                 <div class="print-button-container">
                     <a href="{% url 'receipt_detail' sale.id %}" class="print-button">Final Receipt</a>

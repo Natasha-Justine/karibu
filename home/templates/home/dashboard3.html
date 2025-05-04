@@ -284,40 +284,30 @@
 
     <div class="dashboard-content">
         <div>
-            <h1 style="color:#333">SalesAgent Dashboard</h1>
+            <h1 style="color:#333">SalesAgent Dashboard - {{ branch_name }}</h1>
         </div>
         <div class="card-container">
             <div class="dashboard-card">
-                <h3>Total Sales</h3>
+                <h3>Branch Total Sales</h3>
                 <p>UGX {{ total_sales| floatformat:0 }}</p><br>
-
                 <a href="/allsales/"><input type="submit" value="view"></a>
-
             </div>
 
             <div class="dashboard-card">
-                <h3>TOTAL Stock</h3>
+                <h3>Branch Total Stock</h3>
                 <p>kgs {{ total_stock}}</p><br>
-
                 <a href="/allstock/"><input type="submit" value="view"></a>
-
             </div>
 
-
             <div class="dashboard-card">
-                <h3>Total Credits</h3>
+                <h3>Branch Total Credits</h3>
                 <p>UGX {{ total_credit_sales| floatformat:0 }}</p><br>
-
                 <a href="/credit/"><input type="submit" value="view"></a>
-
             </div>
 
             <div class="dashboard-card">
-                <h3>All Receipts</h3>
-                <p></p><br>
-
-                <a href="/receipt/"><input type="submit" value="view"></a>
-
+                <h3>Branch Low Stock Items</h3>
+                <p>{{ low_stock_items.count }}</p><br>
             </div>
         </div>
     </div>
