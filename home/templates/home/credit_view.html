@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Details - Karibu Groceries</title>
+    <link rel="stylesheet" href="{% static 'bootstrap-5.3.3-dist/css/bootstrap.css' %}">
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #e2e3e3;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            max-width: 1200px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .table {
+            background-color: #fff;
+            margin-bottom: 30px;
+        }
+        .table th {
+            background-color: #9bf39b;
+            color: black;
+            font-weight: bold;
+        }
+        .table td {
+            vertical-align: middle;
+        }
+        .btn-success {
+            background-color: #4CAF50;
+            border: none;
+            padding: 8px 20px;
+            font-weight: 500;
+        }
+        .btn-success:hover {
+            background-color: #1b5e20;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% block content %}
+        <h1>Credit Details</h1>
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Buyer Name</th>
+                    <th>NIN</th>
+                    <th>Contact</th>
+                    <th>Amount Due</th>
+                    <th>Due Date</th>
+                    <th>Product Name</th>
+                    <th>Sales Agent</th>
+                    <th>Tonnage</th>
+                    <th>Dispatch Date</th>
+                    <th>Branch</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ item.buyer_name }}</td>
+                    <td>{{ item.NIN }}</td>
+                    <td>{{ item.contact }}</td>
+                    <td>{{ item.amount_due }}</td>
+                    <td>{{ item.due_date}}</td>
+                    <td>{{ item.product_name }}</td>
+                    <td>{{ item.salesagent_name }}</td>
+                    <td>{{ item.tonnage }}</td>
+                    <td>{{ item.Dispatch_date }}</td>
+                    <td>{{ item.branch_name }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center">
+            {% if user.is_salesagent %}
+            <a href="{% url 'credit' %}" class="btn btn-success">Back</a>
+            {% endif %}
+            {% if user.is_manager %}
+            <a href="{% url 'credit' %}" class="btn btn-success">Reverse  </a>
+            {% endif %}
+        </div>
+        {% endblock %}
+    </div>
+</body>
+</html>

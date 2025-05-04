@@ -6,43 +6,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(rgba(246, 243, 243, 0.1), rgba(241, 238, 238, 0.1)),
+                        url('/static/sba.jpg');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            position: relative;
+            z-index: 1;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: inherit;
+            filter: brightness(1.1) contrast(1.1);
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #000;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.9);
+            margin: 20px 0;
+        }
+
+        nav ul li a {
+            color: #000;
+            text-decoration: none;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.9);
+            font-weight: bold;
+        }
+
         footer {
-    text-align: center;
-    padding: 15px;
-    background-color: #252525;
-    border-top: 1px solid #817f7f;
-    font-size: 0.9em;
-    margin-top: 5px;
-    overflow: hidden;
-    position: fixed; /* Change to fixed positioning */
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    }
-    
-    footer p {
-    margin-bottom: 1px;
-    color: #f8f2f2;
-    }
+            text-align: center;
+            padding: 15px;
+            background-color: #252525;
+            border-top: 1px solid #817f7f;
+            font-size: 0.9em;
+            margin-top: 5px;
+            overflow: hidden;
+            position: fixed; /* Change to fixed positioning */
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+        
+        footer p {
+            margin-bottom: 1px;
+            color: #f8f2f2;
+        }
     
     </style>
     
 </head>
-<body style="background-image: url('/static/dde.jpg'); background-size: cover; background-color: #f6f5f9ae;  background-blend-mode: multiply;  background-attachment: fixed; background-position: center; opacity: 40px;"></body>
+<body>
 <br><b><br><br><br><br></b>
 
-    <h1 style="text-align: center;">WELCOME TO KARIBU GROCERIES LMT</h1>
-    <br><br><br><br><br>
-    <h2 style="text-align: center;">Your one-stop shop for all your grocery needs</h2>
+    <div class="content-wrapper">
+        <h1 style="text-align: center;">WELCOME TO KARIBU GROCERIES LMT</h1>
+        <br><br><br><br><br>
+        <h2 style="text-align: center;">Your one-stop shop for all your grocery needs</h2>
+        <button class="btn btn-secondary" style="display: block; margin: 0 auto; padding: 10px 20px; font-size: 1.2em; background-color: #afafed; color: white; border: none; border-radius: 5px; cursor: pointer;">
+            <a href="/login">Login</a> 
+        </button>
 
-
-    <nav>
-        <ul style="color:black;"><br><br><br>
-            <li style="text-align: center; color:black;font-size: 40px;">
-                <a href="/login">Login</a> 
-            </li>
-        </ul><br><br><br><br>
-    </nav>
+    </div>
     
 <footer>
     

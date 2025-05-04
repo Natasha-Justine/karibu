@@ -100,6 +100,7 @@ class Credit(models.Model):
     type_of_produce = models.IntegerField(default=0, blank=True, null=True)
     tonnage = models.IntegerField(blank=True, null=True, default=0)
     Dispatch_date = models.DateField(auto_now_add=True)
+    branch_name = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return self.buyer_name

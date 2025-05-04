@@ -79,17 +79,20 @@
         .content {
             flex-grow: 1;
             padding-left: 250px; /* Adjust based on sidebar width */
-            padding-right: 0px;
-            padding-top: 220px; /* Adjust as needed */
-            padding-bottom: 20px; /* Adjust based on footer height */
-            flex-direction: column; /* Stack table and back button vertically */
-            align-items: stretch; /* Make the table stretch to fill the width */
+            padding-right: 20px;
+            padding-top: 20px; /* Increased from 40px to 80px for more top spacing */
+            padding-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content horizontally */
+            min-height: 100vh;
         }
         table {
-            width: 100%; /* Make the table take full width of its container */
-            margin-bottom: 20px;
+            width: 100%;
+            max-width: 1200px; /* Limit table width for better readability */
+            margin: 20px auto; /* Center the table with auto margins */
             border-collapse: collapse;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional shadow */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             background-color: white;
         }
         thead th {
@@ -238,7 +241,6 @@
             <tfoot>
                 <tr>
                     <td colspan="{% if user.is_manager or user.is_salesagent %} 5 {% else %} 4 {% endif %}">
-                        <a href="/dashboard2/" class="btn btn-primary mb-3">Back</a>
                     </td>
                 </tr>
             </tfoot>

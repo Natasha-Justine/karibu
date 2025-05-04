@@ -65,6 +65,7 @@ urlpatterns = [
 
     path('credit/', views.credit, name='credit'),
     path('credit_add/', views.credit_add, name='credit_add'),
+    path('credit_view/<int:pk>/', views.credit_view, name='credit_view'),
     path('credit_edit/<int:pk>/', views.credit_edit, name='credit_edit'),
     path('credit_delete/<int:pk>/', views.credit_delete, name='credit_delete'),
 

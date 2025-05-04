@@ -12,9 +12,14 @@
             background-color: #e2e3e3;
             padding: 0px;
         }
+        .container {
+            margin-left: 250px; 
+            width: calc(100% - 250px); /* Subtract sidebar width */
+        }
         .salestables {
-            margin-top: 20px;
-            margin-left: 165px;
+            margin: 20px auto;
+            max-width: 1000px; /* Limit maximum width */
+            width: 100%;
         }
         .modal-title {
             font-weight: bold;
@@ -105,9 +110,7 @@
             margin-right: 10px;
             fill: black;
         }
-        .mb-4{
-            text-align: center;
-        }
+        
 
     </style>
 </head>
@@ -201,18 +204,7 @@
     
     
     <div class="container">
-        <div>
-            {% if user.is_owner %}
-            <a href="/dashboard1/" class="btn btn-primary mb-3 ">Back</a>
-            {% endif %}
-            {% if user.is_manager %}
-            <a href="/dashboard2/" class="btn btn-primary mb-3">Go back</a>
-            {% endif %}
-            {% if user.is_salesagent %}
-            <a href="/dashboard3/" class="btn btn-primary mb-3">Reverse</a>
-            {% endif %}
-        </div>
-    
+        
         {% block content %}
             <h1 class="mb-4">Sales Transactions</h1>
             <div class="modal fade" id="selectStockModal" tabindex="-1" aria-labelledby="selectStockModalLabel" aria-hidden="true">

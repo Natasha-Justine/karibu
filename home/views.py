@@ -223,11 +223,14 @@ def manager(request):
     total_stock = Stock.objects.aggregate(
         total_quantity = Sum('tonnage')
     )['total_quantity'] or 0
+
+    low_stock_items = Stock.objects.filter(tonnage__lt=200)  # Example threshold for low stock
     context = {
         'total_sales': total_sales,
         'total_cash_sales': total_cash_sales,
         'total_credit_sales': total_credit_sales,
         'total_stock': total_stock,
+        'low_stock_items': low_stock_items,
     }
     return render(request, 'home/dashboard2.html', context)
 
@@ -337,6 +340,13 @@ def credit_edit(request, pk):
     else:
         form = CreditForm(instance=credit_record)
     return render(request, 'home/credit_edit.html', {'form': form, 'credit_record': credit_record})
+
+def credit_view(request, pk):
+    creditdetails = get_object_or_404(Credit, pk=pk)
+    context = {
+        'item': creditdetails
+    }
+    return render(request, 'home/credit_view.html', context)
 
 @login_required
 def credit_delete(request, pk):

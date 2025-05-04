@@ -230,6 +230,7 @@
                         <th>Sales Agent</th>
                         <th>Tonnage</th>
                         <th>Dispatch Date</th>
+                        <th>Branch</th>
                         {% if user.is_manager or user.is_salesagent %}
                         <th>Actions</th>
                         {% endif %}
@@ -247,8 +248,11 @@
                         <td>{{ item.salesagent_name }}</td>
                         <td>{{ item.tonnage }}</td>
                         <td>{{ item.Dispatch_date }}</td>
+                        <td>{{ item.branch_name }}</td>
                         {% if user.is_manager or user.is_salesagent %}
-                        <td><a href="/credit_edit/{{item.id}}/">Edit</a>
+                        <td>
+                            <a href="/credit_view/{{item.id}}/">View</a>   
+                            <a href="/credit_edit/{{item.id}}/">Edit</a>
                             <a href="/credit_delete/{{item.id}}/">Delete</a>
                         {% endif %}
                         </td>
