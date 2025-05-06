@@ -380,20 +380,43 @@ def owner(request):
     Owner dashboard view.
     Shows company-wide statistics and stock levels across all branches.
     """
-    # Calculate company-wide statistics
-    total_cash_sales = Sale.objects.filter(method_of_payment='Cash').aggregate(
-        total_cash=Sum('amount_received')
-    )['total_cash'] or 0
- 
-    total_credit_sales = Credit.objects.aggregate(
-        total_credit=Sum('amount_due')
-    )['total_credit'] or 0
-
+    # Get all branches
+    branches = Branch.objects.all()
+    branch_stats = {}
+    
+    # Calculate stats for each branch
+    for branch in branches:
+        cash_sales = Sale.objects.filter(
+            product_name__branch_name=branch.branch_name,
+            method_of_payment='Cash'
+        ).aggregate(
+            total_cash=Sum('amount_received')
+        )['total_cash'] or 0
+        
+        credit_sales = Credit.objects.filter(
+            branch_name=branch.branch_name
+        ).aggregate(
+            total_credit=Sum('amount_due')
+        )['total_credit'] or 0
+        
+        total_stock = Stock.objects.filter(
+            branch_name=branch.branch_name
+        ).aggregate(
+            total_quantity=Sum('tonnage')
+        )['total_quantity'] or 0
+        
+        branch_stats[branch.branch_name] = {
+            'cash_sales': cash_sales,
+            'credit_sales': credit_sales,
+            'total_sales': cash_sales + credit_sales,
+            'total_stock': total_stock
+        }
+    
+    # Calculate company-wide totals
+    total_cash_sales = sum(stats['cash_sales'] for stats in branch_stats.values())
+    total_credit_sales = sum(stats['credit_sales'] for stats in branch_stats.values())
     total_sales = total_cash_sales + total_credit_sales
-
-    total_stock = Stock.objects.aggregate(
-        total_quantity=Sum('tonnage')
-    )['total_quantity'] or 0
+    total_stock = sum(stats['total_stock'] for stats in branch_stats.values())
 
     # Group stocks by item name across branches
     all_stocks = Stock.objects.all()
@@ -426,6 +449,7 @@ def owner(request):
         'recent_sales': recent_sales,
         'combined_stocks': combined_stocks,
         'low_stock_items': low_stock_items,
+        'branch_stats': branch_stats,
     }
     return render(request, 'home/dashboard1.html', context)
 

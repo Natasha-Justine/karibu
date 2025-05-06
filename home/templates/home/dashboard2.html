@@ -284,37 +284,51 @@
 
     <div class="dashboard-content">
         <div>
-            <h1 style="color:#333">Manager Dashboard - {{ branch_name }}</h1>
+            <h1 style="color:#333">Branch Manager Dashboard - {{ branch_name }}</h1>
         </div>
         <div class="card-container">
             <div class="dashboard-card">
                 <h3>Branch Total Sales</h3>
-                <p>UGX {{ total_sales| floatformat:0 }}</p><br>
-                <a href="/allsales/"><input type="submit" value="view"></a>
+                <p>UGX {{ total_sales| floatformat:0 }}</p>
+                <div class="breakdown">
+                    <small>Cash Sales: UGX {{ total_cash_sales| floatformat:0 }}</small><br>
+                    <small>Credit Sales: UGX {{ total_credit_sales| floatformat:0 }}</small>
+                </div>
+                <a href="/allsales/"><input type="submit" value="View Sales"></a>
             </div>
 
             <div class="dashboard-card">
-                <h3>Branch Total Stock</h3>
-                <p>kgs {{ total_stock}}</p><br>
-                <a href="/allstock/"><input type="submit" value="view"></a>
+                <h3>Branch Stock Level</h3>
+                <p>{{ total_stock }} kg</p>
+                <div class="breakdown">
+                    <small>Low Stock Items: {{ low_stock_items.count }}</small>
+                </div>
+                <a href="/allstock/"><input type="submit" value="View Stock"></a>
             </div>
 
             <div class="dashboard-card">
-                <h3>Branch Total Credits</h3>
-                <p>UGX {{ total_credit_sales| floatformat:0 }}</p><br>
-                <a href="/credit/"><input type="submit" value="view"></a>
+                <h3>Branch Credits</h3>
+                <p>UGX {{ total_credit_sales| floatformat:0 }}</p>
+                <a href="/credit/"><input type="submit" value="View Credits"></a>
             </div>
 
             <div class="dashboard-card">
-                <h3>Branch Low Stock Items</h3>
-                <p>{{ low_stock_items.count }}</p><br>
-                <p></p><br>
+                <h3>Recent Activity</h3>
+                <p>{{ low_stock_items.count }} items need restocking</p>
+                <div class="breakdown">
+                    {% if low_stock_items %}
+                    <small>Items below 200kg:</small><br>
+                    {% for item in low_stock_items|slice:":3" %}
+                    <small>- {{ item.item_name }}: {{ item.tonnage }}kg</small><br>
+                    {% endfor %}
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2025 Karibu Grocery Limited.Designed by Justine Natasha.</p>
+        <p>&copy; 2025 Karibu Grocery Limited. Designed by Justine Natasha.</p>
         <p>Your Trusted Source for Quality Groceries in Uganda.</p>
     </footer>
 

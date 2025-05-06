@@ -214,6 +214,75 @@
         .branch-table tbody tr:last-child td {
             border-bottom: none;
         }
+
+        .branch-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            margin-top: 20px;
+            max-width: 960px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .branch-card {
+            background: rgb(213, 213, 213);
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 10px;
+            transition: transform 0.2s ease;
+        }
+        
+        .branch-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .branch-card.company-total {
+            background-color: #f9f9f9;
+            border: 2px solid #4CAF50;
+        }
+        
+        .branch-card h4 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+        }
+        
+        .branch-stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            color: black;
+            background: rgba(255,255,255,0.7);
+            border-radius: 5px;
+        }
+        
+        .branch-stats-table th, .branch-stats-table td {
+            padding: 12px 8px;
+            text-align: left;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .branch-stats-table th {
+            font-weight: bold;
+            width: 40%;
+        }
+        
+        .branch-stats-table td {
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .branch-stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -229,25 +298,25 @@
                 </div>
             </div>
         </div>
-        <a href="" class="menu-item">
+        <a href="/allsales/" class="menu-item">
             <svg viewBox="0 0 24 24">
                 <path fill="currentColor" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"/>
             </svg>
-            <span>Allsales</span>
+            <span>All Sales</span>
         </a><br>
 
-        <a href="" class="menu-item">
+        <a href="/credit/" class="menu-item">
             <svg viewBox="0 0 24 24">
                 <path fill="currentColor" d="M5,5H19V7H5M5,11H19V13H5M5,17H15V19H5M17,17V19L20,18L17,17Z"/>
             </svg>
-            <span>All credits</span>
+            <span>All Credits</span>
         </a><br>
 
-        <a href="" class="menu-item">
+        <a href="/receipt/" class="menu-item">
             <svg viewBox="0 0 24 24">
                 <path fill="currentColor" d="M11,17H13V15H11V17M11,13H13V7H11V13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/>
             </svg>
-            <span>All receipts</span>
+            <span>All Receipts</span>
         </a><br>
         {% if user.is_authenticated %}
         <form action="{% url 'logout' %}" method="POST">
@@ -263,21 +332,60 @@
     </div>
     <div class="main-content">
         <h1 style="color:#333">Director Dashboard</h1>
-        <div class="card-container">
-            <div class="dashboard-card">
-                <h3>Total Sales</h3>
-                <p>UGX {{ total_sales| floatformat:0 }}</p><br>
+        
+        <div class="branch-stats-grid">
+            <div class="branch-card" style="background-color: #f9f9f9;">
+                <h4 style="color: #333; font-size: 1.4rem; margin-bottom: 20px;">Company Total Statistics</h4>
+                <table class="branch-stats-table">
+                    <tbody>
+                        <tr>
+                            <th>Total Sales:</th>
+                            <td>UGX {{ total_sales|floatformat:0 }}</td>
+                        </tr>
+                        <tr>
+                            <th>Cash Sales:</th>
+                            <td>UGX {{ total_cash_sales|floatformat:0 }}</td>
+                        </tr>
+                        <tr>
+                            <th>Credit Sales:</th>
+                            <td>UGX {{ total_credit_sales|floatformat:0 }}</td>
+                        </tr>
+                        <tr>
+                            <th>Total Stock:</th>
+                            <td>{{ total_stock }} kg</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="dashboard-card">
-                <h3>Total Credits</h3>
-                <p>UGX {{ total_credit_sales| floatformat:0 }}</p><br>
+            
+            {% for branch_name, stats in branch_stats.items %}
+            <div class="branch-card">
+                <h4>{{ branch_name }} Branch Statistics</h4>
+                <table class="branch-stats-table">
+                    <tbody>
+                        <tr>
+                            <th>Total Sales:</th>
+                            <td>UGX {{ stats.total_sales|floatformat:0 }}</td>
+                        </tr>
+                        <tr>
+                            <th>Cash Sales:</th>
+                            <td>UGX {{ stats.cash_sales|floatformat:0 }}</td>
+                        </tr>
+                        <tr>
+                            <th>Credit Sales:</th>
+                            <td>UGX {{ stats.credit_sales|floatformat:0 }}</td>
+                        </tr>
+                        <tr>
+                            <th>Total Stock:</th>
+                            <td>{{ stats.total_stock }} kg</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="dashboard-card">
-                <h3>Low Stock Items</h3>
-                <p>{{ low_stock_items.count }}</p><br>
-            </div>
+            {% endfor %}
         </div>
-        <h1 style="text-align: center; color: #333;">Stock Levels On Branch</h1>
+        
+        <h2 style="text-align: center; color: #333; margin-top: 30px;">Stock Levels By Branch</h2>
         <div class="stock-grid">
             {% for stock in combined_stocks %}
             <div class="stock-card">
@@ -312,5 +420,24 @@
     </footer>
 
     <script src="{% static 'bootstrap-5.0.2-dist/js/bootstrap.bundle.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Prevent link clicks from navigating, except logout
+            const menuLinks = document.querySelectorAll('.menu-item:not(button.menu-item)');
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                });
+            });
+            
+            // Prevent action buttons in cards from navigating
+            const actionButtons = document.querySelectorAll('.dashboard-card input[type="submit"]');
+            actionButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                });
+            });
+        });
+    </script>
 </body>
 </html>

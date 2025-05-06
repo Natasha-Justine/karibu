@@ -251,9 +251,9 @@
                         <td>{{ item.branch_name }}</td>
                         {% if user.is_manager or user.is_salesagent %}
                         <td>
-                            <a href="/credit_view/{{item.id}}/">View</a>   
-                            <a href="/credit_edit/{{item.id}}/">Edit</a>
-                            <a href="/credit_delete/{{item.id}}/">Delete</a>
+                            <a href="/credit_view/{{item.id}}/"class=""><i class="bi bi-eye-fill"></i></a>  
+                            <a href="/credit_edit/{{item.id}}/" class="text-dark" style="text-decoration: none;"><i class="bi bi-pencil-fill"></i></a>
+                            <a href="/credit_delete/{{item.id}}/" class="text-danger"><i class="bi bi-trash-fill"></i></a>
                         {% endif %}
                         </td>
                     </tr>
